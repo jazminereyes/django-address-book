@@ -32,7 +32,19 @@ def register(request):
 
 @login_required(login_url='/')
 def index(request):
-    contact = Contact.objects.filter(user=request.user)
+    contact_list = Contact.objects.filter(user=request.user)
+
+    paginator = Paginator(contact_list, 10)
+
+    page = request.GET.get('page')
+
+    try:
+        contact = paginator.page(page)
+    except PageNotAnInteger:
+        contact = paginator.page(1)
+    except EmptyPage:
+        contact = paginator.page(paginator.num_pages)
+
     return render(request, 'addressbook/home.html', {'contact': contact})
 
 @login_required(login_url='/')
