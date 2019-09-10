@@ -16,10 +16,6 @@ from .models import Contact
 from .forms import ContactForm, DataForm
 
 # Create your views here.
-def index(request):
-    contact = Contact.objects.filter(user=request.user)
-    return render(request, 'addressbook/home.html', {'contact': contact})
-
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -33,6 +29,11 @@ def register(request):
     else: 
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+@login_required(login_url='/')
+def index(request):
+    contact = Contact.objects.filter(user=request.user)
+    return render(request, 'addressbook/home.html', {'contact': contact})
 
 @login_required(login_url='/')
 def add_contact(request):
@@ -93,7 +94,11 @@ def import_contact(request):
                 obj_value = Contact.objects.filter(user=request.user, first_name=contact['FirstName'], last_name=contact['LastName'], contact_number=contact['ContactNo'], address=contact['Address'])
 
                 if not obj_value:
-                    Contact.objects.create(user=request.user, first_name=contact['FirstName'], last_name=contact['LastName'], contact_number=contact['ContactNo'], address=contact['Address'])
+                    if len(contact['ContactNo']) > 13:
+                        messages.error(request,"Invalid contact number for %s %s" % (contact['FirstName'], contact['LastName']))
+                        return HttpResponseRedirect(reverse('import_contact'))
+                    else:
+                        Contact.objects.create(user=request.user, first_name=contact['FirstName'], last_name=contact['LastName'], contact_number=contact['ContactNo'], address=contact['Address'])
             
             return redirect('index')
         
