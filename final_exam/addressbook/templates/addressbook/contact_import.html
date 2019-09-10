@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %} 
+{% load static %} 
+
+{% block content %}
+<div class="container-login100">
+    <div class="wrap-login100">
+        <div class="login100-form-title" style="background-image: url({% static 'images/header.jpg' %});">
+            <span class="login100-form-title-1">
+                Import Contacts
+            </span>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{% url 'index' %}" class="btn btn-info">Back <i class="fa fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md 12 text-center">
+                {% if messages %}
+                <ul class="messages text-info">
+                    {% for message in messages %}
+                    <li{% if message.error %} class="{{ message.error }} text-info" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        <form class="login100-form validate-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Upload your contacts</p>
+                </div>
+            </div>
+            <div class="wrap-input100 validate-input m-b-26 mt-3" data-validate="CSV File is required">
+                <input class="input100" type="file" name="file_contacts" required id="id_csv">
+                <span class="focus-input100"></span>
+            </div>
+            
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn mr-3" type="submit">
+                    Upload
+                </button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+{% endblock %}
