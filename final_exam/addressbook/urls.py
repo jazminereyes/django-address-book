@@ -14,8 +14,8 @@ urlpatterns = [
         url(r'^import/$', ContactImport.as_view(), name='import_contact'),
         url(r'^export/$', ContactExport.as_view(), name='export_contact'),
     ])),
-    url(r'^contact/(?P<contact_id>[0-9]+)/', include([
-        url(r'^update/$', ContactUpdate.as_view(), name='edit_contact'),
+    url(r'^contact/(?P<pk>[0-9]+)/', include([
+        url(r'^$', ContactUpdate.as_view(), name='edit_contact'),
         url(r'^delete/$', ContactDelete.as_view(), name='delete_contact')
     ]))
 ]

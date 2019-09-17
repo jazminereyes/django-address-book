@@ -43,8 +43,8 @@
                                 <td>{{ ct.contact_number }}</td>
                                 <td>{{ ct.address }}</td>
                                 <td>
-                                    <a href="{% url 'edit_contact' contact_id=ct.id %}" class="btn btn-round btn-success"><i class="fa fa-edit"></i></a>
-                                    <a href="{% url 'delete_contact' contact_id=ct.id %}" class="btn btn-round btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{% url 'edit_contact' pk=ct.id %}" class="btn btn-round btn-success"><i class="fa fa-edit"></i></a>
+                                    <a href="{% url 'delete_contact' pk=ct.id %}" class="btn btn-round btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -65,7 +65,7 @@
                             <a class="page-link">{{ page_obj.number }}</a>
                         </li>
                         <li class="page-item">
-                            {% if contact_list.has_next %}
+                            {% if page_obj.has_next %}
                             <a href="?page={{ page_obj.next_page_number }}" class="page-link">&gt;</a>
                             {% endif %}
                         </li>
