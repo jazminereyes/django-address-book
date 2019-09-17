@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'final_exam.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'addressbook',
-        'USER': 'jaz',
-        'PASSWORD': 'secure123',
+        'NAME': 'address_book',
+        'USER': 'philsmile',
+        'PASSWORD': '',
         'HOST': ''
     }
 }
@@ -124,3 +124,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/home/'
+LOGIN_URL = '/'

@@ -1,0 +1,61 @@
+{% extends 'layouts/base.html' %} 
+{% load static %} 
+
+{% block content %}
+<div class="container-login100">
+    <div class="wrap-login100">
+        <div class="login100-form-title" style="background-image: url({% static 'images/header.jpg' %});">
+            <span class="login100-form-title-1">
+                Contact
+            </span>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{% url 'index' %}" class="btn btn-info">Back <i class="fa fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <form class="login100-form validate-form" method="POST">
+            {% csrf_token %}
+
+            <div class="wrap-input100 validate-input m-b-26" data-validate="First Name is required">
+                <span class="label-input100">First Name</span>
+                <input class="input100" type="text" name="first_name" maxlength="200" required id="id_first_name" value="{% if form.first_name.value %} {{ form.first_name.value }} {% endif %}">
+                <span class="focus-input100"></span>
+            </div>
+
+            {{ form.first_name.errors }}
+
+            <div class="wrap-input100 validate-input m-b-26" data-validate="Last Name is required">
+                <span class="label-input100">Last Name</span>
+                <input class="input100" type="text" name="last_name" maxlength="200" required id="id_last_name" value="{% if form.last_name.value %} {{ form.last_name.value }} {% endif %}">
+                <span class="focus-input100"></span>
+            </div>
+
+            {{ form.last_name.errors }}
+
+            <div class="wrap-input100 validate-input m-b-26" data-validate="Contact Number is required">
+                <span class="label-input100">Contact Number (09xxxxxxxxx/+639xxxxxxxxx)</span>
+                <input class="input100" type="text" name="contact_number" required id="id_contact_number" value="{% if form.contact_number.value %} {{ form.contact_number.value }} {% endif %}">
+                <span class="focus-input100"></span>
+            </div>
+
+            {{ form.contact_number.errors }}
+
+            <div class="wrap-input100 validate-input m-b-26" data-validate="Address is required">
+                <span class="label-input100">Address</span>
+                <input class="input100" type="text" name="address" required id="id_address" value="{% if form.address.value %} {{ form.address.value }} {% endif %}">
+                <span class="focus-input100"></span>
+            </div>
+
+            {{ form.address.errors }}
+
+            <div class="container-login100-form-btn">
+                <button class="login100-form-btn" type="submit">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

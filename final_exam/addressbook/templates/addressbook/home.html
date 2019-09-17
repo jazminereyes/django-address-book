@@ -36,7 +36,7 @@
                             <th class="text-center">Address</th>
                             <th class="text-center">Action</th>
 
-                            {% for ct in contact %}
+                            {% for ct in contact_list %}
                             <tr>
                                 <td>{{ ct.first_name }}</td>
                                 <td>{{ ct.last_name }}</td>
@@ -57,16 +57,16 @@
                 <div class="col-md-12 text-center">
                     <ul class="pagination">
                         <li class="page-item">
-                            {% if contact.has_previous %}
-                            <a href="?page={{ contact.previous_page_number }}" class="page-link">&lt;</a>
+                            {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&lt;</a>
                             {% endif %}
                         </li>
                         <li class="active" class="page-item">
-                            <a class="page-link">{{ contact.number }}</a>
+                            <a class="page-link">{{ page_obj.number }}</a>
                         </li>
                         <li class="page-item">
-                            {% if contact.has_next %}
-                            <a href="?page={{ contact.next_page_number }}" class="page-link">&gt;</a>
+                            {% if contact_list.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}" class="page-link">&gt;</a>
                             {% endif %}
                         </li>
                     </ul>
